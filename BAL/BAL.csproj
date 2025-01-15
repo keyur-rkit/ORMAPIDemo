@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="8.5.2" />
+    <PackageReference Include="ServiceStack.OrmLite" Version="8.5.2" />
+    <PackageReference Include="ServiceStack.OrmLite.MySql" Version="8.5.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MAL\MAL.csproj" />
+  </ItemGroup>
+
+</Project>
