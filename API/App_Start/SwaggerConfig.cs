@@ -238,7 +238,7 @@ namespace API
                         // the Swagger 2.0 specification, you can enable UI support as shown below.
                         //
                         //c.EnableOAuth2Support(
-                        //    clientId: "test-client-id",
+                        //    clientId: "test-client-Id",
                         //    clientSecret: null,
                         //    realm: "test-realm",
                         //    appName: "Swagger UI"

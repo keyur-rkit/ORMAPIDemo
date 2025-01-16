@@ -24,7 +24,7 @@ namespace BAL.Operations
         {
             _objResponse = new Response<DTOBK01>();
 
-            _dbFactory = ;
+            _dbFactory = HttpContext.Current;
         }
 
         public ENUMEntryType Type { get; set; }
