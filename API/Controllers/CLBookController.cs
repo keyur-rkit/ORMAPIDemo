@@ -10,12 +10,19 @@ using System.Web.Http;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Book Controller for methods related books table 
+    /// </summary>
     [RoutePrefix("api/Books")]
     public class CLBookController : ApiController
     {
         private BLBooks _objBLBook = new BLBooks();
         private Response _objResponse;
 
+        /// <summary>
+        /// Get all books method
+        /// </summary>
+        /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetAllBooks")]
         public IHttpActionResult GetAllBooks()
@@ -24,6 +31,10 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Get book by id method
+        /// </summary>
+        /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetBookById")]
         public IHttpActionResult GetBookById(int id)
@@ -32,6 +43,10 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Get books by category method
+        /// </summary>
+        /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetBooksByCategory")]
         public IHttpActionResult GetBooksByCategory(string category)
@@ -40,6 +55,11 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Get N number of latest books
+        /// </summary>
+        /// <param name="numberOfBooks"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetNLatestBooks")]
         public IHttpActionResult GetNLatestBooks(int numberOfBooks)
@@ -48,6 +68,12 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Get books in specified range method
+        /// </summary>
+        /// <param name="minimum"></param>
+        /// <param name="maximum"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetBooksInRange")]
         public IHttpActionResult GetBooksInRange(int minimum,int maximum)
@@ -56,6 +82,11 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Add new book method
+        /// </summary>
+        /// <param name="objDTOBK01"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpPost]
         [Route("AddBook")]
         public IHttpActionResult AddBook(DTOBK01 objDTOBK01)
@@ -70,6 +101,12 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Edit book method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="objDTOBK01"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpPut]
         [Route("EditBook")]
         public IHttpActionResult EditBook(int id, DTOBK01 objDTOBK01)
@@ -86,6 +123,11 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Delete book is exist method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpDelete]
         [Route("DeleteBook")]
         public IHttpActionResult DeleteBook(int id)
@@ -100,6 +142,12 @@ namespace API.Controllers
             return Ok(_objResponse);
         }
 
+        /// <summary>
+        /// Edit only price of book method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="price"></param>
+        /// <returns>IHttpActionResult response</returns>
         [HttpPatch]
         [Route("EditBookPrice")]
         public IHttpActionResult EditBookPrice(int id,decimal price)

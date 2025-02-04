@@ -8,6 +8,12 @@ namespace API.Extensions
 {
     public static class DTOToPOCO
     {
+        /// <summary>
+        /// Method to convert DTO to POCO
+        /// </summary>
+        /// <typeparam name="POCO"></typeparam>
+        /// <param name="objDTO"></param>
+        /// <returns></returns>
         public static POCO Convert<POCO>(this object objDTO)
         {
             // Get the type of the POCO
