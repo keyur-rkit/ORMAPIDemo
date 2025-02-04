@@ -103,7 +103,8 @@ namespace API.BL.Operations
         {
             using (var db = _dbFactory.OpenDbConnection())
             {
-                _objResponse.Data = db.Select<BK01>(b => b.K01F04 == cat);
+                //// changes : query insted of :b => b.K01F04 == cat 
+                _objResponse.Data = db.Select<BK01>("SELECT * FROM BK01 WHERE K01F04 = @cat", new {cat});
                 _objResponse.Message = $"Category : {cat}";
             }
             if (_objResponse.Data.Count == 0)
