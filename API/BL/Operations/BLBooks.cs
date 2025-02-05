@@ -9,6 +9,7 @@ using API.Models.Enum;
 using API.BL.Interface;
 using ServiceStack.OrmLite;
 using API.Extensions;
+using ServiceStack;
 
 namespace API.BL.Operations
 {
@@ -283,6 +284,30 @@ namespace API.BL.Operations
                         db.UpdateOnly(() => new BK01 { K01F05 = price }, where: b => b.K01F01 == Id);
                         _objResponse.Message = $"Price of Book with Id {Id} changed to {price}";
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                _objResponse.IsError = true;
+                _objResponse.Message = ex.Message;
+            }
+            return _objResponse;
+        }
+
+        /// <summary>
+        /// Find Max Price of Books 
+        /// </summary>
+        /// <returns>Max Price in decimal</returns>
+        public Response MaxPrice()
+        {
+            try
+            {
+                using (var db = _dbFactory.OpenDbConnection())
+                {
+                    decimal maxPrice = db.Scalar<decimal>("SELECT MAX(K01F05) FROM BK01");
+                    _objResponse.Data = maxPrice; 
+                    _objResponse.Message = $"Max Price of book : {maxPrice}";
+
                 }
             }
             catch (Exception ex)

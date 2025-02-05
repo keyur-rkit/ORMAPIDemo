@@ -83,6 +83,18 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Get Max Price of Book method
+        /// </summary>
+        /// <returns>IHttpActionResult response</returns>
+        [HttpGet]
+        [Route("GetMaxPrice")]
+        public IHttpActionResult GetMaxPrice()
+        {
+            _objResponse = _objBLBook.MaxPrice();
+            return Ok(_objResponse);
+        }
+
+        /// <summary>
         /// Add new book method
         /// </summary>
         /// <param name="objDTOBK01"></param>
