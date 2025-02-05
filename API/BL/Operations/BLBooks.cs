@@ -10,6 +10,8 @@ using API.BL.Interface;
 using ServiceStack.OrmLite;
 using API.Extensions;
 using ServiceStack;
+using System.Data;
+using System.Collections.Generic;
 
 namespace API.BL.Operations
 {
@@ -44,7 +46,7 @@ namespace API.BL.Operations
         /// <returns>True if book exists, otherwise false.</returns>
         public bool IsBK01Exist(int id)
         {
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
                 return db.Exists<BK01>(x => x.K01F01 == id);
             }
@@ -56,9 +58,9 @@ namespace API.BL.Operations
         /// <returns>Response with book list.</returns>
         public Response GetAll()
         {
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
-                var result = db.Select<BK01>().ToList();
+                List<BK01> result = db.Select<BK01>().ToList();
                 if (result.Count == 0)
                 {
                     _objResponse.IsError = true;
@@ -88,7 +90,7 @@ namespace API.BL.Operations
 
                 return _objResponse;
             }
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
                 _objResponse.Data = db.SingleById<BK01>(id);
                 return _objResponse;
@@ -102,7 +104,7 @@ namespace API.BL.Operations
         /// <returns>Response with books in the specified category.</returns>
         public Response GetByCategory(string cat)
         {
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
                 //// changes : query insted of :b => b.K01F04 == cat 
                 _objResponse.Data = db.Select<BK01>("SELECT * FROM BK01 WHERE K01F04 = @cat", new {cat});
@@ -130,13 +132,9 @@ namespace API.BL.Operations
                 return _objResponse;
             }
 
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
-                var q = db.From<BK01>()
-                    .OrderByDescending(b => b.K01F06)
-                    .Take(num);
-
-                _objResponse.Data = db.Select(q);
+                _objResponse.Data = db.Select(db.From<BK01>().OrderByDescending(b => b.K01F06).Take(num));
                 _objResponse.Message = $"Latest books";
             }
             if (_objResponse.Data.Count == 0)
@@ -162,12 +160,9 @@ namespace API.BL.Operations
                 return _objResponse;
             }
 
-            using (var db = _dbFactory.OpenDbConnection())
+            using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
-                var q = db.From<BK01>()
-                    .Where(b => b.K01F05 > min && b.K01F05 < max);
-
-                _objResponse.Data = db.Select(q);
+                _objResponse.Data = db.Select(db.From<BK01>().Where(b => b.K01F05 > min && b.K01F05 < max));
                 _objResponse.Message = "Books in range";
             }
             if (_objResponse.Data.Count == 0)
@@ -221,7 +216,7 @@ namespace API.BL.Operations
         {
             try
             {
-                using (var db = _dbFactory.OpenDbConnection())
+                using (IDbConnection db = _dbFactory.OpenDbConnection())
                 {
                     if (Type == ENUMEntryType.A)
                     {
@@ -251,7 +246,7 @@ namespace API.BL.Operations
         {
             try
             {
-                using (var db = _dbFactory.OpenDbConnection())
+                using (IDbConnection db = _dbFactory.OpenDbConnection())
                 {
                     if (Type == ENUMEntryType.D)
                     {
@@ -277,7 +272,7 @@ namespace API.BL.Operations
         {
             try
             {
-                using (var db = _dbFactory.OpenDbConnection())
+                using (IDbConnection db = _dbFactory.OpenDbConnection())
                 {
                     if (Type == ENUMEntryType.E)
                     {
@@ -302,7 +297,7 @@ namespace API.BL.Operations
         {
             try
             {
-                using (var db = _dbFactory.OpenDbConnection())
+                using (IDbConnection db = _dbFactory.OpenDbConnection())
                 {
                     decimal maxPrice = db.Scalar<decimal>("SELECT MAX(K01F05) FROM BK01");
                     _objResponse.Data = maxPrice; 
