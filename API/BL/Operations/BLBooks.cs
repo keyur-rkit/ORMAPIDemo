@@ -106,8 +106,7 @@ namespace API.BL.Operations
         {
             using (IDbConnection db = _dbFactory.OpenDbConnection())
             {
-                //// changes : query insted of :b => b.K01F04 == cat 
-                _objResponse.Data = db.Select<BK01>("SELECT * FROM BK01 WHERE K01F04 = @cat", new {cat});
+                _objResponse.Data = db.Select<BK01>(b => b.K01F04 == cat);
                 _objResponse.Message = $"Category : {cat}";
             }
             if (_objResponse.Data.Count == 0)
@@ -220,8 +219,9 @@ namespace API.BL.Operations
                 {
                     if (Type == ENUMEntryType.A)
                     {
-                        db.Insert(_objBK01);
-                        _objResponse.Message = "Book Added";
+                        _objBK01.K01F01 = (int)db.Insert(_objBK01, selectIdentity: true);
+                        _objResponse.Message = $"Book Added with Id {_objBK01.K01F01}";
+                        //_objResponse.Message = "Book Added";
                     }
                     else if (Type == ENUMEntryType.E)
                     {
