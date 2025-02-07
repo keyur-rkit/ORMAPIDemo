@@ -34,6 +34,7 @@ namespace API.Controllers
         /// <summary>
         /// Get book by id method
         /// </summary>
+        /// <param name="id">Id of the book.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetBookById")]
@@ -46,7 +47,9 @@ namespace API.Controllers
         /// <summary>
         /// Get books by category method
         /// </summary>
+        /// <param name="category">Category of books to retrieve.</param>
         /// <returns>IHttpActionResult response</returns>
+
         [HttpGet]
         [Route("GetBooksByCategory")]
         public IHttpActionResult GetBooksByCategory(string category)
@@ -58,7 +61,7 @@ namespace API.Controllers
         /// <summary>
         /// Get N number of latest books
         /// </summary>
-        /// <param name="numberOfBooks"></param>
+        /// <param name="numberOfBooks">Number of latest books to retrieve.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetNLatestBooks")]
@@ -71,8 +74,8 @@ namespace API.Controllers
         /// <summary>
         /// Get books in specified range method
         /// </summary>
-        /// <param name="minimum"></param>
-        /// <param name="maximum"></param>
+        /// <param name="minimum">Minimum book price.</param>
+        /// <param name="maximum">Maximum book price.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpGet]
         [Route("GetBooksInRange")]
@@ -97,7 +100,7 @@ namespace API.Controllers
         /// <summary>
         /// Add new book method
         /// </summary>
-        /// <param name="objDTOBK01"></param>
+        /// <param name="objDTOBK01">DTO containing book details.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpPost]
         [Route("AddBook")]
@@ -116,8 +119,8 @@ namespace API.Controllers
         /// <summary>
         /// Edit book method
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="objDTOBK01"></param>
+        /// <param name="id">Id of the book to update.</param>
+        /// <param name="objDTOBK01">DTO containing updated book details.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpPut]
         [Route("EditBook")]
@@ -138,7 +141,7 @@ namespace API.Controllers
         /// <summary>
         /// Delete book is exist method
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of the book to delete.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpDelete]
         [Route("DeleteBook")]
@@ -157,8 +160,8 @@ namespace API.Controllers
         /// <summary>
         /// Edit only price of book method
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="price"></param>
+        /// <param name="id">Id of the book.</param>
+        /// <param name="price">New price to set for the book.</param>
         /// <returns>IHttpActionResult response</returns>
         [HttpPatch]
         [Route("EditBookPrice")]

@@ -42,7 +42,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Checks if a book exists by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Book ID to check.</param>
         /// <returns>True if book exists, otherwise false.</returns>
         public bool IsBK01Exist(int id)
         {
@@ -78,7 +78,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Retrieves a book by ID.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Book ID to fetch.</param>
         /// <returns>Response with book data.</returns>
         public Response GetById(int id)
         {
@@ -100,7 +100,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Retrieves books by category.
         /// </summary>
-        /// <param name="cat"></param>
+        /// <param name="cat">Category name.</param>
         /// <returns>Response with books in the specified category.</returns>
         public Response GetByCategory(string cat)
         {
@@ -120,7 +120,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Retrieves the latest books based on a given number.
         /// </summary>
-        /// <param name="num"></param>
+        /// <param name="num">Number of latest books to retrieve.</param>
         /// <returns>Response with the latest books.</returns>
         public Response GetNLatest(int num)
         {
@@ -147,8 +147,8 @@ namespace API.BL.Operations
         /// <summary>
         /// Retrieves books within a specified price range.
         /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="min">Minimum price.</param>
+        /// <param name="max">Maximum price.</param>
         /// <returns>Response with books in the price range.</returns>
         public Response GetInRange(int min, int max)
         {
@@ -175,7 +175,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Prepares a book object for save or update.
         /// </summary>
-        /// <param name="objDTO"></param>
+        /// <param name="objDTO">Book DTO containing data.</param>
         public void PreSave(DTOBK01 objDTO)
         {
             _objBK01 = objDTO.Convert<BK01>();
@@ -266,7 +266,7 @@ namespace API.BL.Operations
         /// <summary>
         /// Updates the price of a book.
         /// </summary>
-        /// <param name="price"></param>
+        /// <param name="price">New book price.</param>
         /// <returns>Response with updated price information.</returns>
         public Response UpdatePrice(decimal price)
         {
